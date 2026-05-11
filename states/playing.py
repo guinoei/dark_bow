@@ -23,7 +23,7 @@ from settings import (
 )
 from states import State
 from utils.sound import load_sound
-from utils.sprite import load_image
+from utils.sprite import load_image, resource_path
 
 
 class PlayingState(State):
@@ -60,7 +60,8 @@ class PlayingState(State):
         if not pygame.mixer.get_init():
             return
         try:
-            pygame.mixer.music.load(path)
+            full_path = resource_path(path)
+            pygame.mixer.music.load(full_path)
             pygame.mixer.music.play(loops)
             self.current_music = path
         except pygame.error as e:
